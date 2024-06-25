@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        insta485
+    </title>
+</head>
+<body>
+    <div> 
+        <a href = "/">Home </a>
+        <h1>Insta485</h1>
+        <a href = "/explore/"> explore </a>
+        <p> | </p>
+        <a href = "/users/{{logname}}/"> {{logname}}</a>
+    </div>
+    <div>
+        <h1>Following</h1>
+        {% for f in following %}
+        <img src="{{f.filename}}" alt="error showing image">
+        <a href="/users/{{f.username2}}/">{{f.username2}}</a>
+        {% if f.username1 != logname %}
+        
+        {% if f.isfollow != 0 %}
+        <p>following</p>
+        <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+        <form action="/following/?target=/users/{{username}}/followers/" method="post" enctype="multipart/form-data">
+        <input type="submit" name="unfollow" value="unfollow"/>
+        <input type="hidden" name="username" value="{{f.username2}}"/>
+        <input type="hidden" name="operation" value="unfollow"/>
+        </form>
+        {% else %}
+        <p>not following</p>
+        <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+        <form action="/following/?target=/users/{{username}}/followers/" method="post" enctype="multipart/form-data">
+        <input type="submit" name="follow" value="follow"/>
+        <input type="hidden" name="username" value="{{f.username2}}"/>
+        <input type="hidden" name="operation" value="follow"/>
+        </form>
+        {% endif %}
+
+        {% endif %}
+        {% endfor %}
+    </div>
+</body>
+
+</html>

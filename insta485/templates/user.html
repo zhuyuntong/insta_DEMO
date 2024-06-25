@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        insta485
+    </title>
+</head>
+<body>
+    <div> 
+        <a href = "/">Home </a>
+        <h1>Insta485</h1>
+        <a href = "/explore/"> explore </a>
+        <p> | </p>
+        <a href = "/users/{{logname}}/"> {{logname}}</a>
+    </div>
+    <div>
+        <a href="/users/{{username}}/">{{username}}
+        </a>
+        {% if logname != username %}
+        {% if is_follow != 0 %}
+            <p>following </p>
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="/following/?target=/users/{{username}}/" method="post" enctype="multipart/form-data">
+            <input type="submit" name="unfollow" value="unfollow"/>
+            <input type="hidden" name="username" value="{{username}}"/>
+            <input type="hidden" name="operation" value="unfollow"/>
+            </form>
+        {% else %}
+            <p> not following</p>
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="/following/?target=/users/{{username}}/" method="post" enctype="multipart/form-data">
+            <input type="submit" name="follow" value="follow"/>
+            <input type="hidden" name="username" value="{{username}}"/>
+            <input type="hidden" name="operation" value="follow"/>
+            </form>
+        {% endif %}
+        {% endif %}
+        
+        {% if postscount == 1 %}
+        {{postscount['COUNT(p.postid)']}} post
+        {% else %}
+        {{postscount['COUNT(p.postid)']}} posts
+        {% endif %}
+        
+        <a href="/users/{{username}}/followers/">
+            {% if followers['COUNT(f.username1)'] == 1 %}
+            {{followers['COUNT(f.username1)']}} follower
+            {% else %}
+            {{followers['COUNT(f.username1)']}} followers
+            {% endif %}
+        </a>
+        <a href="/users/{{username}}/following/">
+        {{following['COUNT(f.username2)']}} following
+        </a>
+
+        <h2>{{fullname['fullname']}}</h2>
+
+        {% if logname == username %}
+        <a href="{{url_for('edit')}}">Edit profile
+        </a>
+
+        <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+        <input type="submit" name="logout" value="Logout" />
+        </form>
+
+        <form action="/posts/?target=/users/{{username}}/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required />
+        <input type="submit" name="create_post" value="upload new post" />
+        <input type="hidden" name="operation" value="create" />
+        </form>
+        {% endif %}
+    </div>
+    <div>
+        {% for p in posts %}
+        <a href="/posts/{{p.postid}}/">
+            <img src="{{p.filename}}" alt="error showing picture">
+        </a>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

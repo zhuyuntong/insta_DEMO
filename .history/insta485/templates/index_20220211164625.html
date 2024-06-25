@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        insta485
+    </title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a href="/">Home </a>
+        <h1>Insta485</h1>
+        <a href="/explore/"> explore </a>
+        <p> | </p>
+        <a href="/users/{{logname}}/"> {{logname}}</a>
+    </div>
+    <!-- {% for p in posts %}
+    <div>
+        <table style="width:50%">
+            <tr>
+                <th><a href="/users/{{p.owner}}/">
+                        <img src="{{p.owner_img_url}}" alt="{{p.owner}}" style="width:20px;height:20px;">
+                    </a>
+                    <a href="/users/{{p.owner}}/">
+                        <p>{{p.owner}}</p>
+                    </a>
+                    <a href="/posts/{{p.postid}}/">
+                        <p>{{p.timestamp}}</p>
+                    </a>
+                    <img src="{{p.filename}}" alt="Error showing image">
+                    {% for l in likes if l['postid'] == p.postid %}
+
+                    {% if l['COUNT(likeid)'] == 0 or l['COUNT(likeid)'] >= 2 %}
+                    {{l['COUNT(likeid)']}} likes <br>
+                    {% else %}
+                    {{l['COUNT(likeid)']}} like <br>
+                    {% endif %}
+
+                    {% else %}
+                    0 likes <br>
+                    {% endfor %}
+
+                    {% for c in comments %}
+                    {% if c.postid == p.postid %}
+                    <a href="/users/{{c.owner}}/">{{c.owner}}</a> {{c.text}} <br>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for il in islike if il.postid == p.postid %}
+                    <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+                    <form action="/likes/?target=/" method="post"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="operation" value="unlike" />
+                        <input type="hidden" name="postid" value="{{p.postid}}" />
+                        <input type="submit" name="unlike" value="unlike" />
+                    </form>
+                    {% else %}
+                    <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+                    <form action="/likes/?target=/" method="post"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="operation" value="like" />
+                        <input type="hidden" name="postid" value="{{p.postid}}" />
+                        <input type="submit" name="like" value="like" />
+                    </form>
+                    {% endfor %}
+
+                    <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+                    <form action="/comments/?target=/" method="post"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="operation" value="create" />
+                        <input type="hidden" name="postid" value="{{p.postid}}" />
+                        <input type="text" name="text" required />
+                        <input type="submit" name="comment" value="comment" />
+                    </form>
+                </th>
+            </tr>
+        </table>
+    </div>
+    {% endfor %} -->
+    
+    <!-- <div id="reactEntry">
+        Loading ...
+    </div> -->
+    <!-- Load JavaScript -->
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script> -->
+</body>
+
+</html>
